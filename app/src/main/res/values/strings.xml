@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">MasPor</string>
+    <string name="register">MENDAFTAR</string>
+    <string name="login_username_hint">Nama Penggua</string>
+    <string name="login_password_hint">Kata Sandi</string>
+    <string name="signup_login_hint">Sudah memiliki akun? Masuk</string>
+    <string name="login_signup_hint">Belum memiliki akun? Daftar</string>
+
+        <!-- Strings related to login -->
+        <string name="prompt_email">Surel</string>
+        <string name="prompt_password">Kata Sandi</string>
+        <string name="action_sign_in">Masuk atau Daftar</string>
+        <string name="action_sign_in_short">Masuk</string>
+        <string name="welcome">"Selamat Datang !"</string>
+        <string name="invalid_username">Nama Pengguna tidak Benar</string>
+        <string name="invalid_password">Kata Sandi harus lebih >5 karakter</string>
+        <string name="login_failed">"Masuk Gagal"</string>
+
+
+        <string name="toast_image_intent_null">Pengaturan Ambil Gambar hilang!</string>
+        <string name="lbl_set_barang_photo">Pilih Gambar dari</string>
+        <string name="lbl_take_camera_picture">Ambil Gambar dari Kamera</string>
+        <string name="lbl_choose_from_gallery">Pilih dari Galeri</string>
+        <string name="dialog_permission_title">Memberikan Izin</string>
+        <string name="dialog_permission_message">Aplikasi ini Membutuhkan Izin untuk menggunakan fitur ini, Anda bisa mengberikan izin di pengaturan.</string>
+        <string name="go_to_settings">Pergi ke Pengaturan</string>
+
+</resources>

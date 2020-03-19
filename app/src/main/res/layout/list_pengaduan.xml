@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cv_listpengaduan"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    app:cardCornerRadius="6dp"
+    app:cardUseCompatPadding="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            android:paddingTop="5dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="2dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/civ_fotopengaduan"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/jiu"
+                app:civ_border_overlay="true"
+                app:civ_border_width="2dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="8dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_namapengaduan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="NAMA"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_tanggalpengaduan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="waktu"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="5dp">
+
+            <TextView
+                android:id="@+id/tv_isilaporan"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:ellipsize="end"
+                android:maxLines="4"
+                android:text="isi Laporan" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/iv_lampiranpengaduan"
+            android:layout_width="match_parent"
+            android:layout_height="181dp"
+            android:cropToPadding="true"
+            android:fitsSystemWindows="true"
+            android:scaleType="centerCrop"
+            android:visibility="visible" />
+
+        <LinearLayout
+            android:id="@+id/ll_statuspengaduan"
+            android:layout_width="match_parent"
+            android:layout_height="34dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_statuspengaduan"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#fff"
+                android:text="Belum ditanggapi" />
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

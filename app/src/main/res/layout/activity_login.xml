@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".LoginActivity">
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout5"
+        style="@style/parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/login_shape_top"
+        android:orientation="vertical">
+
+        <ImageView
+            style="@style/parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_login_wavetop"
+            android:contentDescription="login background" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView"
+        style="@style/headerText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:fontFamily="@font/asset"
+        android:text="MasPor"
+        android:textSize="34sp" />
+
+    <TextView
+        android:id="@+id/textView6"
+        style="@style/headerText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView"
+        android:text="Aplikasi Pengaduan Laporan Masyarakat"
+        android:textColor="#F5F5F5"
+        android:textSize="20sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:orientation="vertical">
+
+        <ViewFlipper
+            android:id="@+id/vf_login"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="16dp">
+
+            <include
+                android:id="@+id/login_vf"
+                layout="@layout/layout_login" />
+
+            <include
+                android:id="@+id/register_vf"
+                layout="@layout/layout_register" />
+
+            <include
+                android:id="@+id/login_petugas_vf"
+                layout="@layout/layout_login_petugas" />
+        </ViewFlipper>
+    </LinearLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/login_shape_bottom"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/asset"
+                android:text="MasPor"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</RelativeLayout>
+
+
