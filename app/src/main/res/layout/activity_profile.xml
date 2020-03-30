@@ -27,6 +27,7 @@
         android:paddingBottom="3dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/civ_profile_foto"
             android:layout_width="130dp"
             android:layout_height="130dp"
             android:src="@drawable/jiu"

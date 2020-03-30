@@ -1,10 +1,11 @@
-package com.kangtech.MasyarakatLapor.data_model;
+package com.kangtech.MasyarakatLapor.model;
 
 public class ViewLaporanModel {
 
     private String id_nik;
     private String nama;
     private String tgl;
+    private String fotop;
 
     private String isilaporan;
     private String fotolaporan;
@@ -12,10 +13,11 @@ public class ViewLaporanModel {
     private String status;
 
 
-    public ViewLaporanModel(String id_nik, String nama, String tgl, String isilaporan, String fotolaporan, String status) {
+    public ViewLaporanModel(String id_nik, String nama, String tgl, String isilaporan, String fotolaporan, String status, String fotop) {
         this.id_nik = id_nik;
         this.nama = nama;
         this.tgl = tgl;
+        this.fotop = fotop;
 
         this.isilaporan = isilaporan;
         this.fotolaporan = fotolaporan;
@@ -33,6 +35,10 @@ public class ViewLaporanModel {
 
     public String getTgl() {
         return tgl;
+    }
+
+    public String getFotop() {
+        return fotop;
     }
 
     public String getIsilaporan() {

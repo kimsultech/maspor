@@ -1,4 +1,4 @@
-package com.kangtech.MasyarakatLapor.api_controller;
+package com.kangtech.MasyarakatLapor.controller;
 
 import android.app.Application;
 import android.text.TextUtils;

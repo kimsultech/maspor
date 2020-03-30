@@ -1,4 +1,4 @@
-package com.kangtech.MasyarakatLapor.data_model;
+package com.kangtech.MasyarakatLapor.model;
 
 public class ProfilePetugasModel {
 
@@ -7,14 +7,15 @@ public class ProfilePetugasModel {
     private  String username;
     private String telp;
     private  String tipe;
+    private  String fotopetugas;
 
-
-    public ProfilePetugasModel(String id_petugas, String nama, String username, String telp, String tipe) {
+    public ProfilePetugasModel(String id_petugas, String nama, String username, String telp, String tipe, String fotopetugas) {
         this.id_petugas = id_petugas;
         this.nama = nama;
         this.username = username;
         this.telp = telp;
         this.tipe = tipe;
+        this.fotopetugas = fotopetugas;
     }
 
     public String getId_petugas() {
@@ -35,5 +36,9 @@ public class ProfilePetugasModel {
 
     public String getTipe() {
         return tipe;
+    }
+
+    public String getFotopetugas() {
+        return fotopetugas;
     }
 }

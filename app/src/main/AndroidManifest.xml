@@ -19,7 +19,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning"
         android:usesCleartextTraffic="true"
-        android:name=".api_controller.AppController"
+        android:name=".controller.AppController"
         android:requestLegacyExternalStorage="true">
         <activity
             android:name=".LoginActivity"

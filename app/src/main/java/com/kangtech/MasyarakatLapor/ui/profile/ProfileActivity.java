@@ -18,10 +18,12 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.kangtech.MasyarakatLapor.LoginActivity;
 import com.kangtech.MasyarakatLapor.R;
-import com.kangtech.MasyarakatLapor.data_model.ProfileModel;
-import com.kangtech.MasyarakatLapor.data_model.ProfilePetugasModel;
+import com.kangtech.MasyarakatLapor.model.ProfileModel;
+import com.kangtech.MasyarakatLapor.model.ProfilePetugasModel;
 import com.kangtech.MasyarakatLapor.util.Server;
 
 import org.json.JSONArray;
@@ -30,6 +32,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 import static com.kangtech.MasyarakatLapor.LoginActivity.maspor_preferences;
 
@@ -57,6 +61,11 @@ public class ProfileActivity extends AppCompatActivity {
 
     String status_petugas;
     String id;
+    private String status_petugas2;
+
+    private static final String url_foto = Server.URL_FOTO;
+
+    CircleImageView fotoprofilemasyrakat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +84,8 @@ public class ProfileActivity extends AppCompatActivity {
         txttipe = findViewById(R.id.tv_tipe);
         txtidpetugas = findViewById(R.id.tv_idpetugas);
 
+        fotoprofilemasyrakat = findViewById(R.id.civ_profile_foto);
+
         LinearLayout llidpetugas = findViewById(R.id.ll_idpetugas);
         LinearLayout llnik = findViewById(R.id.ll_nik);
 
@@ -86,9 +97,17 @@ public class ProfileActivity extends AppCompatActivity {
 
         // Cek status petugas jika TRUE maka info untuk petugas
         status_petugas = "petugas";
+        status_petugas2 = "admin";
         id = sharedpreferences.getString(TAG_ID, null);
 
         if (status_petugas.equals(sharedpreferences.getString("petugas", "apaan"))) {
+            // set Visibilitas
+            llnik.setVisibility(View.GONE);
+            llidpetugas.setVisibility(View.VISIBLE);
+            cltipe.setVisibility(View.VISIBLE);
+
+            getProfilePetugas();
+        } else if (status_petugas2.equals(sharedpreferences.getString("petugas", "adminnn"))) {
             // set Visibilitas
             llnik.setVisibility(View.GONE);
             llidpetugas.setVisibility(View.VISIBLE);
@@ -141,7 +160,8 @@ public class ProfileActivity extends AppCompatActivity {
                                         profile.getString("id_nik"),
                                         profile.getString("nama"),
                                         profile.getString("username"),
-                                        profile.getString("telp")
+                                        profile.getString("telp"),
+                                        profile.getString("fotop")
                                 ));
                             }
 
@@ -149,6 +169,13 @@ public class ProfileActivity extends AppCompatActivity {
                             txtnama.setText(profileList.get(0).getNama());
                             txttelp.setText(profileList.get(0).getTelp());
                             txtnik.setText(String.valueOf(profileList.get(0).getId_nik()));
+
+                            Glide.with(fotoprofilemasyrakat)
+                                    .load(url_foto + profileList.get(0).getFotop())
+                                    .onlyRetrieveFromCache(true)
+                                    .placeholder(R.drawable.ic_account_circle_black_24dp)
+                                    .dontAnimate()
+                                    .into(fotoprofilemasyrakat);
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -183,7 +210,9 @@ public class ProfileActivity extends AppCompatActivity {
                                         profilepetugas.getString("nama"),
                                         profilepetugas.getString("username"),
                                         profilepetugas.getString("telp"),
-                                        profilepetugas.getString("tipe")
+                                        profilepetugas.getString("tipe"),
+                                        profilepetugas.getString("fotopetugas")
+
                                 ));
                             }
 
@@ -192,6 +221,13 @@ public class ProfileActivity extends AppCompatActivity {
                             txttelp.setText(profilepetugasList.get(0).getTelp());
                             txttipe.setText(profilepetugasList.get(0).getTipe());
                             txtidpetugas.setText(String.valueOf(profilepetugasList.get(0).getId_petugas()));
+
+                            Glide.with(fotoprofilemasyrakat)
+                                    .load(url_foto + profilepetugasList.get(0).getFotopetugas())
+                                    .onlyRetrieveFromCache(true)
+                                    .placeholder(R.drawable.ic_account_circle_black_24dp)
+                                    .dontAnimate()
+                                    .into(fotoprofilemasyrakat);
 
                         } catch (JSONException e) {
                             e.printStackTrace();

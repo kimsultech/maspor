@@ -1,4 +1,4 @@
-package com.kangtech.MasyarakatLapor.data_model;
+package com.kangtech.MasyarakatLapor.model;
 
 public class ViewTanggapanModel {
 
@@ -10,9 +10,11 @@ public class ViewTanggapanModel {
     private String idpetugas;
     private String namapetugas;
 
+    private String fotopetugas;
 
 
-    public ViewTanggapanModel(String idtanggapan, String idpengaduna, String tgltanggapan, String tanggapan, String idpetugas, String namapetugas) {
+
+    public ViewTanggapanModel(String idtanggapan, String idpengaduna, String tgltanggapan, String tanggapan, String idpetugas, String namapetugas, String fotopetugas) {
         this.idtanggapan = idtanggapan;
         this.idpengaduna = idpengaduna;
         this.tgltanggapan = tgltanggapan;
@@ -20,6 +22,7 @@ public class ViewTanggapanModel {
         this.tanggapan = tanggapan;
         this.idpetugas = idpetugas;
         this.namapetugas = namapetugas;
+        this.fotopetugas = fotopetugas;
 
     }
 
@@ -45,6 +48,10 @@ public class ViewTanggapanModel {
 
     public String getNamapetugas() {
         return namapetugas;
+    }
+
+    public String getFotopetugas() {
+        return fotopetugas;
     }
 
 }

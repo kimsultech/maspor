@@ -25,6 +25,7 @@ public class PengaduanListAdapter extends RecyclerView.Adapter<PengaduanListAdap
     ArrayList<HashMap<String, String>> list_data;
 
     private static final String url_image = Server.URL_IMG;
+    private static final String url_foto = Server.URL_FOTO;
 
     private Context activity;
 
@@ -67,6 +68,11 @@ public class PengaduanListAdapter extends RecyclerView.Adapter<PengaduanListAdap
         holder.nama.setText(list_data.get(position).get("nama"));
         holder.tanggal.setText(list_data.get(position).get("tanggal"));
         holder.isilaporan.setText(list_data.get(position).get("isilaporan"));
+
+        Glide.with(holder.profile_pic)
+                .load(url_foto + list_data.get(position).get("fotop"))
+                .placeholder(R.drawable.ic_account_circle_black_24dp)
+                .into(holder.profile_pic);
 
         holder.cvlaporan.setOnClickListener(new View.OnClickListener() {
             @Override

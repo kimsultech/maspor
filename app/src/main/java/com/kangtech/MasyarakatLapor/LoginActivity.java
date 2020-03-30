@@ -23,13 +23,19 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.kangtech.MasyarakatLapor.api_controller.AppController;
+import com.android.volley.toolbox.Volley;
+import com.kangtech.MasyarakatLapor.controller.AppController;
+import com.kangtech.MasyarakatLapor.model.ProfileModel;
+import com.kangtech.MasyarakatLapor.model.ProfilePetugasModel;
 import com.kangtech.MasyarakatLapor.util.Server;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -60,6 +66,11 @@ public class LoginActivity extends AppCompatActivity {
     String id, username;
     public static final String maspor_preferences = "login_shared";
     public static final String session_status = "session_status";
+
+    private List<ProfileModel> profileList;
+    private List<ProfilePetugasModel> profilepetugasList;
+    private String setTipe;
+    private String usernamepetugas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -183,8 +194,9 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                String usernamepetugas = usernameEditTextPetugas.getText().toString();
+                usernamepetugas = usernameEditTextPetugas.getText().toString();
                 String passwordpetugas = passwordEditTextPetugas.getText().toString();
+
 
                 // mengecek kolom yang kosong
                 if (usernamepetugas.trim().length() > 0 && passwordpetugas.trim().length() > 0) {
@@ -203,6 +215,46 @@ public class LoginActivity extends AppCompatActivity {
         });
 
     }
+
+    private void getProfilePetugas() {
+        final String url_profile_petugas = Server.URL + "get_profile_petugas.php?idp=" + usernamepetugas;
+        profilepetugasList = new ArrayList<>();
+        StringRequest stringRequest2 = new StringRequest(Request.Method.GET, url_profile_petugas, new
+                Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONArray array = new JSONArray(response);
+
+                            for (int i = 0; i < array.length(); i++) {
+                                JSONObject profilepetugas = array.getJSONObject(i);
+
+                                profilepetugasList.add(new ProfilePetugasModel(
+                                        profilepetugas.getString("id_petugas"),
+                                        profilepetugas.getString("nama"),
+                                        profilepetugas.getString("username"),
+                                        profilepetugas.getString("telp"),
+                                        profilepetugas.getString("tipe"),
+                                        profilepetugas.getString("fotopetugas")));
+                            }
+
+                            setTipe = profilepetugasList.get(0).getTipe();
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                });
+
+        Volley.newRequestQueue(this).add(stringRequest2);
+    }
+
 
     private void checkLogin ( final String username, final String password){
         pDialog = new ProgressDialog(this);
@@ -225,6 +277,7 @@ public class LoginActivity extends AppCompatActivity {
                     if (success == 1) {
                         String username = jObj.getString(TAG_USERNAME);
                         String id = jObj.getString(TAG_ID);
+                        String foto = jObj.getString("foto");
 
                         Log.e("Successfully Login!", jObj.toString());
 
@@ -236,6 +289,7 @@ public class LoginActivity extends AppCompatActivity {
                         editor.putString(TAG_ID, id);
                         editor.putString(TAG_USERNAME, username);
                         editor.putString("petugas", "bukanpetugas");
+                        editor.putString("foto", foto);
                         editor.apply();
 
                         // Memanggil main activity
@@ -306,6 +360,8 @@ public class LoginActivity extends AppCompatActivity {
                     if (success == 1) {
                         String usernamepetugas = jObj.getString(TAG_USERNAME);
                         String id = jObj.getString(TAG_ID);
+                        String tipenya = jObj.getString("tipep");
+                        String fotonya = jObj.getString("fotop");
 
                         Log.e("Successfully Login!", jObj.toString());
 
@@ -316,7 +372,8 @@ public class LoginActivity extends AppCompatActivity {
                         editor.putBoolean(session_status, true);
                         editor.putString(TAG_ID, id);
                         editor.putString(TAG_USERNAME, usernamepetugas);
-                        editor.putString("petugas", "petugas");
+                        editor.putString("petugas", tipenya);
+                        editor.putString("foto", fotonya);
                         editor.apply();
 
                         // Memanggil main activity

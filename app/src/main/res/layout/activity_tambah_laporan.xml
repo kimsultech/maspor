@@ -54,7 +54,7 @@
                             android:layout_height="match_parent"
                             android:gravity="top"
                             android:hint="Isi Laporan"
-                            android:inputType="textMultiLine"
+                            android:inputType="textLongMessage|textMultiLine"
                             android:scrollbarStyle="insideOverlay"
                             android:scrollbars="vertical" />
                     </com.google.android.material.textfield.TextInputLayout>

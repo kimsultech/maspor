@@ -24,6 +24,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.kangtech.MasyarakatLapor.adapter.PengaduanListAdapter;
 import com.kangtech.MasyarakatLapor.ui.profile.ProfileActivity;
@@ -60,6 +62,8 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     LinearLayout fab_full;
     private FloatingActionButton fab_icon;
 
+    private static final String url_foto = Server.URL_FOTO;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,7 +95,10 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
         // Mengambil data Pengaduan dari Server
         String statusnya = "petugas";
+        String statusnya2 = "admin";
         if (statusnya.equals(sharedpreferences.getString("petugas", "apaan"))) {
+            getPengaduanPetugas();
+        } if (statusnya2.equals(sharedpreferences.getString("petugas", "apaan"))) {
             getPengaduanPetugas();
         } else {
             getPengaduan();
@@ -99,7 +106,10 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
         // Profil gambar set Klik
         CircleImageView profilepic = findViewById(R.id.profile_image);
-        profilepic.setImageResource(R.drawable.jiu);
+        Glide.with(profilepic)
+                .load(url_foto + sharedpreferences.getString("foto", "nullfoto"))
+                .placeholder(R.drawable.ic_account_circle_black_24dp)
+                .into(profilepic);
         profilepic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -116,6 +126,17 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
         listpengaduan.setNestedScrollingEnabled(false);
 
+        String tipe = "petugas";
+        String tipe2 = "admin";
+        if (tipe.equals(sharedpreferences.getString("petugas", ""))) {
+            fab_full.setVisibility(View.GONE);
+            fab_icon.setVisibility(View.GONE);
+        } if (tipe2.equals(sharedpreferences.getString("petugas", ""))) {
+            fab_full.setVisibility(View.GONE);
+            fab_icon.setVisibility(View.GONE);
+        } else {
+            // kosong
+        }
         fab_full.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -157,6 +178,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                         map.put("tanggal", json.getString("tgl_pengaduan"));
                         map.put("lampiranfoto", json.getString("foto"));
                         map.put("status", json.getString("status"));
+                        map.put("fotop", json.getString("foto_profile"));
                         list_data.add(map);
                         PengaduanListAdapter adapter = new PengaduanListAdapter(MainActivity.this, list_data);
                         listpengaduan.setLayoutManager(linearLayoutManager);
@@ -196,6 +218,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                         map.put("tanggal", json.getString("tgl_pengaduan"));
                         map.put("lampiranfoto", json.getString("foto"));
                         map.put("status", json.getString("status"));
+                        map.put("fotop", json.getString("foto_profile"));
                         list_data.add(map);
                         PengaduanListAdapter adapter = new PengaduanListAdapter(MainActivity.this, list_data);
                         listpengaduan.setLayoutManager(linearLayoutManager);
@@ -238,7 +261,10 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
             public void run() {
                 pullTOpengaduan.setRefreshing(false);
                 String statusnya = "petugas";
+                String statusnya2 = "admin";
                 if (statusnya.equals(sharedpreferences.getString("petugas", "apaan"))) {
+                    getPengaduanPetugas();
+                } else if (statusnya2.equals(sharedpreferences.getString("petugas", "apaan"))) {
                     getPengaduanPetugas();
                 } else {
                     getPengaduan();

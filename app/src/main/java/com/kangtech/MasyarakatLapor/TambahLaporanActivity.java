@@ -164,11 +164,24 @@ public class TambahLaporanActivity extends AppCompatActivity {
                                     }
                                 })
                                 .show();
+                    }else if (isikosong.matches("")) {
+                        new AlertDialog.Builder(context)
+                                .setTitle("Isi Laporan Kosong")
+                                .setMessage("Anda belum menulis laporan, setidaknya jelaskan Gambar tersebut")
+                                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                })
+                                .show();
                     } else {
                         addEmployee();
+
                     }
 
                 }
+
 
             }
         });
@@ -247,6 +260,9 @@ public class TambahLaporanActivity extends AppCompatActivity {
                 super.onPostExecute(s);
                 loading.dismiss();
                 Toast.makeText(TambahLaporanActivity.this, s, Toast.LENGTH_LONG).show();
+
+                // keambali ke mainactivity
+                finish();
             }
 
             @Override
@@ -299,6 +315,9 @@ public class TambahLaporanActivity extends AppCompatActivity {
                 super.onPostExecute(s);
                 loading.dismiss();
                 Toast.makeText(TambahLaporanActivity.this, s, Toast.LENGTH_LONG).show();
+
+                // keambali ke mainactivity
+                finish();
             }
 
             @Override

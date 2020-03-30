@@ -77,6 +77,7 @@
                             android:layout_marginRight="3dp"
                             android:text="BELUM DITANGGAPI"
                             android:textAlignment="textEnd"
+                            android:textColor="#F44336"
                             android:textSize="14sp"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -200,7 +201,6 @@
                                     android:layout_height="45dp"
                                     android:layout_marginTop="10dp"
                                     android:layout_marginBottom="5dp"
-                                    android:src="@drawable/jiu"
                                     app:civ_border_overlay="true"
                                     app:civ_border_width="2dp" />
 
@@ -264,7 +264,7 @@
                         android:orientation="vertical">
 
                         <LinearLayout
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="60dp"
                             android:layout_marginTop="40dp"
@@ -290,6 +290,16 @@
                                 android:textAlignment="textEnd"
                                 android:textSize="12sp" />
                         </LinearLayout>
+
+                        <Button
+                            android:id="@+id/btn_laporan_selesai"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="SELESAI"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:visibility="gone" />
+
                     </LinearLayout>
 
                 </androidx.cardview.widget.CardView>
