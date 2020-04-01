@@ -78,7 +78,7 @@ public class LoginActivity extends AppCompatActivity {
     private String setTipe;
     private String usernamepetugas;
 
-    private static final String url_reg = URL + "registrasi_masyarakat_.php";
+    private static final String url_reg = URL + "registrasi_masyarakat.php";
 
     TextInputEditText reg_nik,reg_name,reg_username,reg_password,reg_telp;
     Button btnreg;
@@ -268,7 +268,7 @@ public class LoginActivity extends AppCompatActivity {
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
                 loading.dismiss();
-                Toast.makeText(LoginActivity.this, "Daftar berhasil, silakan Login", Toast.LENGTH_LONG).show();
+                Toast.makeText(LoginActivity.this, s, Toast.LENGTH_LONG).show();
 
                 // keambali ke Login Masyarakat
                 viewFlipper.setDisplayedChild(0);
