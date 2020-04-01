@@ -91,6 +91,7 @@ public class ViewLaporanActivity extends AppCompatActivity {
     private static final String url_foto = Server.URL_FOTO;
 
     Button btn_laporanselesai;
+    private String idpetugasnya;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -157,6 +158,17 @@ public class ViewLaporanActivity extends AppCompatActivity {
                 tanggapanDialog.show();
             }
         });
+
+
+        btn_laporanselesai = findViewById(R.id.btn_laporan_selesai);
+
+        btn_laporanselesai.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateLaporanSelesai();
+            }
+        });
+
 
         /* --------------------------------- */
 
@@ -290,8 +302,21 @@ public class ViewLaporanActivity extends AppCompatActivity {
                                         .placeholder(R.drawable.ic_account_circle_black_24dp)
                                         .into(civpetugas);
 
+                                idpetugasnya = viewTanggapan.get(0).getIdpetugas();
+
                                 fab_full.setVisibility(View.GONE);
                                 fab_icon.setVisibility(View.GONE);
+
+                                String getPetugasInfo = idpetugasnya.trim();
+                                String getStatusLap = "SELESAI";
+                                if (getPetugasInfo.equals(sharedpreferences.getString("id", null))) {
+                                    if (getStatusLap.equals(statuslaporan.getText().toString())) {
+                                        btn_laporanselesai.setVisibility(View.GONE);
+                                    } else {
+                                        btn_laporanselesai.setVisibility(View.VISIBLE);
+                                    }
+
+                                }
                             }
 
 
@@ -372,6 +397,47 @@ public class ViewLaporanActivity extends AppCompatActivity {
                 params.put("id_petugas_app", sharedpreferences.getString("id", ""));
 
                 params.put("status_app", tatus);
+
+
+                RequestHandler rh = new RequestHandler();
+                String res = rh.sendPostRequest(url_kirim_tanggapan, params);
+                return res;
+            }
+        }
+        AddEmployee ae = new AddEmployee();
+        ae.execute();
+    }
+
+    private void updateLaporanSelesai() {
+        final String url_kirim_tanggapan = URL + "laporan_update_selesai.php";
+
+
+        @SuppressLint("StaticFieldLeak")
+        class AddEmployee extends AsyncTask<Void, Void, String> {
+            ProgressDialog loading;
+
+
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                loading = ProgressDialog.show(ViewLaporanActivity.this, "Update Status Laporan...", "Tunggu Sebentar...", false, false);
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                loading.dismiss();
+                Toast.makeText(ViewLaporanActivity.this, s, Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            protected String doInBackground(Void... v) {
+
+
+                HashMap<String, String> params = new HashMap<>();
+                //params.put("id_tanggapan", null);
+                params.put("id_pengaduan_app", extras.getString("idpengaduanview"));
+                params.put("status_app", "selesai");
 
 
                 RequestHandler rh = new RequestHandler();

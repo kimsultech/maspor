@@ -1,10 +1,12 @@
 package com.kangtech.MasyarakatLapor;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -24,9 +26,11 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.textfield.TextInputEditText;
 import com.kangtech.MasyarakatLapor.controller.AppController;
 import com.kangtech.MasyarakatLapor.model.ProfileModel;
 import com.kangtech.MasyarakatLapor.model.ProfilePetugasModel;
+import com.kangtech.MasyarakatLapor.util.RequestHandler;
 import com.kangtech.MasyarakatLapor.util.Server;
 
 import org.json.JSONArray;
@@ -37,6 +41,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static com.kangtech.MasyarakatLapor.util.Server.URL;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -72,6 +78,12 @@ public class LoginActivity extends AppCompatActivity {
     private String setTipe;
     private String usernamepetugas;
 
+    private static final String url_reg = URL + "registrasi_masyarakat_.php";
+
+    TextInputEditText reg_nik,reg_name,reg_username,reg_password,reg_telp;
+    Button btnreg;
+    private ViewFlipper viewFlipper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,7 +106,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
         //Pidah dari Login ke Register dan sebaliknya
-        final ViewFlipper viewFlipper = findViewById(R.id.vf_login);
+        viewFlipper = findViewById(R.id.vf_login);
 
         //animation untuk viewfliper
         Animation slide_in_left = AnimationUtils.loadAnimation(this, R.anim.slide_in_left);
@@ -150,6 +162,22 @@ public class LoginActivity extends AppCompatActivity {
         final EditText usernameEditTextPetugas = findViewById(R.id.editTextUsernamePetugas);
         final EditText passwordEditTextPetugas = findViewById(R.id.editTextPasswordPetugas);
         final Button loginButtonPetugas = findViewById(R.id.btn_login_petugas);
+
+        // Regsiter
+        reg_nik = findViewById(R.id.tie_reg_nik);
+        reg_name = findViewById(R.id.tie_reg_name);
+        reg_username = findViewById(R.id.tie_reg_username);
+        reg_password = findViewById(R.id.tie_reg_password);
+        reg_telp = findViewById(R.id.tie_reg_telp);
+
+        btnreg = findViewById(R.id.btn_register);
+        btnreg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                regMasyarakat();
+            }
+        });
+
 
         // Cek session login jika TRUE maka langsung buka MainActivity
         sharedpreferences = getSharedPreferences(maspor_preferences, Context.MODE_PRIVATE);
@@ -216,43 +244,57 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    private void getProfilePetugas() {
-        final String url_profile_petugas = Server.URL + "get_profile_petugas.php?idp=" + usernamepetugas;
-        profilepetugasList = new ArrayList<>();
-        StringRequest stringRequest2 = new StringRequest(Request.Method.GET, url_profile_petugas, new
-                Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONArray array = new JSONArray(response);
+    private void regMasyarakat() {
 
-                            for (int i = 0; i < array.length(); i++) {
-                                JSONObject profilepetugas = array.getJSONObject(i);
+        String regnik = reg_nik.getText().toString();
+        String regname = reg_name.getText().toString();
+        String regusername = reg_username.getText().toString();
+        String regpassword = reg_password.getText().toString();
+        String regtelp = reg_telp.getText().toString();
 
-                                profilepetugasList.add(new ProfilePetugasModel(
-                                        profilepetugas.getString("id_petugas"),
-                                        profilepetugas.getString("nama"),
-                                        profilepetugas.getString("username"),
-                                        profilepetugas.getString("telp"),
-                                        profilepetugas.getString("tipe"),
-                                        profilepetugas.getString("fotopetugas")));
-                            }
 
-                            setTipe = profilepetugasList.get(0).getTipe();
+        @SuppressLint("StaticFieldLeak")
+        class AddEmployee extends AsyncTask<Void, Void, String> {
+            ProgressDialog loading;
 
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
 
-                    }
-                });
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                loading = ProgressDialog.show(LoginActivity.this, "Mendaftarkan...", "Tunggu Sebentar...", false, false);
+            }
 
-        Volley.newRequestQueue(this).add(stringRequest2);
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                loading.dismiss();
+                Toast.makeText(LoginActivity.this, "Daftar berhasil, silakan Login", Toast.LENGTH_LONG).show();
+
+                // keambali ke Login Masyarakat
+                viewFlipper.setDisplayedChild(0);
+            }
+
+            @Override
+            protected String doInBackground(Void... v) {
+
+
+                HashMap<String, String> params = new HashMap<>();
+                //params.put("id", null);
+                params.put("nik_app", regnik);
+                params.put("nama_app", regname);
+                params.put("username_app", regusername);
+                params.put("password_app", regpassword);
+                params.put("telp_app", regtelp);
+                params.put("foto_profile_app", "default.jpg");
+
+
+                RequestHandler rh = new RequestHandler();
+                String res = rh.sendPostRequest(url_reg, params);
+                return res;
+            }
+        }
+        AddEmployee ae = new AddEmployee();
+        ae.execute();
     }
 
 

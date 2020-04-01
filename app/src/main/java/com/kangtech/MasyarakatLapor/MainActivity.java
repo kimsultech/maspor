@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         String statusnya2 = "admin";
         if (statusnya.equals(sharedpreferences.getString("petugas", "apaan"))) {
             getPengaduanPetugas();
-        } if (statusnya2.equals(sharedpreferences.getString("petugas", "apaan"))) {
+        } else if (statusnya2.equals(sharedpreferences.getString("petugas", "apaan"))) {
             getPengaduanPetugas();
         } else {
             getPengaduan();
