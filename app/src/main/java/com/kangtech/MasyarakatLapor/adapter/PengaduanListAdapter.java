@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.kangtech.MasyarakatLapor.R;
-import com.kangtech.MasyarakatLapor.ViewLaporanActivity;
+import com.kangtech.MasyarakatLapor.ui.laporan.ViewLaporanActivity;
 import com.kangtech.MasyarakatLapor.util.Server;
 
 import java.util.ArrayList;
@@ -63,7 +63,6 @@ public class PengaduanListAdapter extends RecyclerView.Adapter<PengaduanListAdap
                 .load(url_image + list_data.get(position).get("lampiranfoto"))
                 .transition(new DrawableTransitionOptions()
                         .crossFade())
-                .placeholder(R.mipmap.ic_launcher)
                 .into(holder.lampiran_pic);
         holder.nama.setText(list_data.get(position).get("nama"));
         holder.tanggal.setText(list_data.get(position).get("tanggal"));

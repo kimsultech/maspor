@@ -22,7 +22,7 @@
         android:name=".controller.AppController"
         android:requestLegacyExternalStorage="true">
         <activity
-            android:name=".LoginActivity"
+            android:name=".ui.login.LoginActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -31,21 +31,23 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"
+        <activity android:name=".ui.MainActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".ui.profile.ProfileActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".TambahLaporanActivity"
+        <activity android:name=".ui.laporan.TambahLaporanActivity"
             android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />
 
-        <activity android:name=".ImagePickerActivity"
+        <activity android:name=".ui.ImagePickerActivity"
             android:theme="@style/Theme.MaterialComponents.Light" />
 
         <activity android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
-        <activity android:name=".ViewLaporanActivity"
+        <activity android:name=".ui.laporan.ViewLaporanActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ui.profile.ViewProfileActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <provider

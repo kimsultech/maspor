@@ -1,4 +1,4 @@
-package com.kangtech.MasyarakatLapor;
+package com.kangtech.MasyarakatLapor.ui.login;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
@@ -25,19 +25,18 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.google.android.material.textfield.TextInputEditText;
+import com.kangtech.MasyarakatLapor.ui.MainActivity;
+import com.kangtech.MasyarakatLapor.R;
 import com.kangtech.MasyarakatLapor.controller.AppController;
 import com.kangtech.MasyarakatLapor.model.ProfileModel;
 import com.kangtech.MasyarakatLapor.model.ProfilePetugasModel;
 import com.kangtech.MasyarakatLapor.util.RequestHandler;
 import com.kangtech.MasyarakatLapor.util.Server;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -285,7 +284,7 @@ public class LoginActivity extends AppCompatActivity {
                 params.put("username_app", regusername);
                 params.put("password_app", regpassword);
                 params.put("telp_app", regtelp);
-                params.put("foto_profile_app", "default.jpg");
+                params.put("foto_profile_app", "default.png");
 
 
                 RequestHandler rh = new RequestHandler();

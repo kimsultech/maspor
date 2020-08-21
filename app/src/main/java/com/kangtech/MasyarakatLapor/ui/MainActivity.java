@@ -1,4 +1,4 @@
-package com.kangtech.MasyarakatLapor;
+package com.kangtech.MasyarakatLapor.ui;
 
 import android.content.Context;
 import android.content.Intent;
@@ -25,9 +25,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.kangtech.MasyarakatLapor.R;
 import com.kangtech.MasyarakatLapor.adapter.PengaduanListAdapter;
+import com.kangtech.MasyarakatLapor.ui.laporan.TambahLaporanActivity;
 import com.kangtech.MasyarakatLapor.ui.profile.ProfileActivity;
 import com.kangtech.MasyarakatLapor.util.Server;
 
@@ -40,7 +41,7 @@ import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-import static com.kangtech.MasyarakatLapor.LoginActivity.maspor_preferences;
+import static com.kangtech.MasyarakatLapor.ui.login.LoginActivity.maspor_preferences;
 
 public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
 

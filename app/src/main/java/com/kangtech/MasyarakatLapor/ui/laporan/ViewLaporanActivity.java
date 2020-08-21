@@ -1,9 +1,10 @@
-package com.kangtech.MasyarakatLapor;
+package com.kangtech.MasyarakatLapor.ui.laporan;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -31,8 +32,10 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
+import com.kangtech.MasyarakatLapor.R;
 import com.kangtech.MasyarakatLapor.model.ViewLaporanModel;
 import com.kangtech.MasyarakatLapor.model.ViewTanggapanModel;
+import com.kangtech.MasyarakatLapor.ui.profile.ViewProfileActivity;
 import com.kangtech.MasyarakatLapor.util.RequestHandler;
 import com.kangtech.MasyarakatLapor.util.Server;
 import com.ortiz.touchview.TouchImageView;
@@ -49,7 +52,7 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-import static com.kangtech.MasyarakatLapor.LoginActivity.maspor_preferences;
+import static com.kangtech.MasyarakatLapor.ui.login.LoginActivity.maspor_preferences;
 import static com.kangtech.MasyarakatLapor.util.Server.URL;
 
 public class ViewLaporanActivity extends AppCompatActivity {
@@ -92,6 +95,8 @@ public class ViewLaporanActivity extends AppCompatActivity {
 
     Button btn_laporanselesai;
     private String idpetugasnya;
+
+    String id_nik;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -185,6 +190,16 @@ public class ViewLaporanActivity extends AppCompatActivity {
         fab_handle();
 
 
+        civfoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(ViewLaporanActivity.this, ViewProfileActivity.class);
+                i.putExtra("idnik_view", id_nik);
+                startActivity(i);
+            }
+        });
+
+
     }
 
     private void getLaporan() {
@@ -219,7 +234,7 @@ public class ViewLaporanActivity extends AppCompatActivity {
                                     .load(url_image + viewLaporan.get(0).getFotolaporan())
                                     .transition(new DrawableTransitionOptions()
                                             .crossFade())
-                                    .placeholder(R.mipmap.ic_launcher)
+                                    .placeholder(R.drawable.transparan)
                                     .into(lampiranlaporan);
 
                             Glide.with(civfoto)
@@ -228,6 +243,8 @@ public class ViewLaporanActivity extends AppCompatActivity {
                                     .placeholder(R.drawable.ic_account_circle_black_24dp)
                                     .dontAnimate()
                                     .into(civfoto);
+
+                            id_nik = viewLaporan.get(0).getId_nik();
 
 
                             String nofoto = "tanpagambar";
@@ -316,6 +333,8 @@ public class ViewLaporanActivity extends AppCompatActivity {
                                         btn_laporanselesai.setVisibility(View.VISIBLE);
                                     }
 
+                                } else {
+
                                 }
                             }
 
@@ -355,6 +374,7 @@ public class ViewLaporanActivity extends AppCompatActivity {
                 tanggapanDialog.dismiss();
             }
         });
+
     }
 
 

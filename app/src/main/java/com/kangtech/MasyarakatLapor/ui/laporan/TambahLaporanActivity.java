@@ -1,4 +1,4 @@
-package com.kangtech.MasyarakatLapor;
+package com.kangtech.MasyarakatLapor.ui.laporan;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -14,13 +14,11 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.provider.Settings;
-import android.text.method.ScrollingMovementMethod;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Scroller;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -33,6 +31,9 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.bumptech.glide.Glide;
 import com.google.android.material.textfield.TextInputEditText;
+import com.kangtech.MasyarakatLapor.ui.ImagePickerActivity;
+import com.kangtech.MasyarakatLapor.ui.MainActivity;
+import com.kangtech.MasyarakatLapor.R;
 import com.kangtech.MasyarakatLapor.util.RequestHandler;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
@@ -48,7 +49,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
-import static com.kangtech.MasyarakatLapor.LoginActivity.maspor_preferences;
+import static com.kangtech.MasyarakatLapor.ui.login.LoginActivity.maspor_preferences;
 import static com.kangtech.MasyarakatLapor.util.Server.URL;
 
 public class TambahLaporanActivity extends AppCompatActivity {
